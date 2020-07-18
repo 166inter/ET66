@@ -219,48 +219,47 @@ class Demo(tk.Frame):
         self.msg.grid(row=0, column=0)
 
         self.picture = tk.PhotoImage(file='braunCalc35pct-2.gif')
-        a = 34
+        a = 34 #width of big buttons
+        b = 20 #width of on/off buttons
+
         img_rects = [
                      #number buttons
-                     #Rect(,,,), # btn 0
-                     #Rect(,,,), # btn 1
-                     #Rect(,,,), # btn 2
-                     #Rect(,,,), # btn 3
-                     #Rect(,,,), # btn 4
-                     #Rect(,,,), # btn 5                    
-                     #Rect(,,,), # btn 6
-                     #Rect(77, 280, 77+a, 280+a),    # btn 7
-                     #Rect(123, 279, 157, 313),      # btn 8
-                     #Rect(169, 280, 169 +a, 280+a), # btn 9
+                     Rect(77,418,77+a,418+a), # btn 0
+                     Rect(77,372,77+a,372+a), # btn 1
+                     Rect(124,372,124+a,372+a), # btn 2
+                     Rect(170,373,170+a,373+a), # btn 3
+                     Rect(77,326,77+a,326+a), # btn 4
+                     Rect(123,326,123+a,326+a), # btn 5                    
+                     Rect(170,326,170+a,326+a), # btn 6
+                     Rect(77, 280, 77+a, 280+a),    # btn 7
+                     Rect(123, 279, 157, 313),      # btn 8
+                     Rect(169, 280, 169 +a, 280+a), # btn 9
 
                      #green buttons
-                     #Rect(,,,), # btn m+
-                     #Rect(,,,), # btn m-
-                     #Rect(,,,), # btn mr
-                     #Rect(,,,), # btn mc
-                     #Rect(,,,), # btn plmin
-                     #Rect(,,,), # btn eq
+                     Rect(31,233,31+a,233+a), # btn m+
+                     Rect(76,233,76+a,233+a), # btn m-
+                     Rect(123,233,123+a,233+a), # btn mr
+                     Rect(170,233,170+a,233+a), # btn mc
+                     Rect(216,233,216+a,233+a), # btn plmin
+                     Rect(170,418,170+a,418+a), # btn eq
 
 
                      #on and off buttons
-                     #Rect(,,,), # btn on
-                     #Rect(,,,), # btn off
+
+                     Rect(37,170,37+b,170+b), # btn on
+                     Rect(83,170,83+b,170+b), # btn off
 
                      #brown buttons
-                     #Rect(,,,), # btn dec
-                     #Rect(,,,), # btn del pct
-                     #Rect(,,,), # btn sqrt
-                     #Rect(,,,), # btn pct
-                     #Rect(,,,), # btn ce c
-                     #Rect(,,,), # btn div
-                     #Rect(,,,), # btn mul
-                     #Rect(,,,), # btn sub
-                     #Rect(,,,), # btn add
+                     Rect(123,418,123+a,418+a), # btn dec
+                     Rect(31,279,31+a,279+a), # btn del pct
+                     Rect(31,326,31+a,326+a), # btn sqrt
+                     Rect(31,372,31+a,372+a), # btn pct
+                     Rect(31,418,31+a,418+a), # btn ce c
+                     Rect(216,280,216+a,280+a), # btn div
+                     Rect(216,326,216+a,326+a), # btn mul
+                     Rect(216,373,216+a,373+a), # btn sub
+                     Rect(216,418,216+a,418+a), # btn add
                      ]
-
-        #self.picture2 = tk.PhotoImage(file='braunCalc35pct-2.gif')
-        #input_text = 8
-        #window.configure(background="gray20")
 
 
         self.imagemapper = ImageMapper(self.picture, img_rects)
@@ -276,14 +275,86 @@ class Demo(tk.Frame):
         tk.Entry(window, font=('Helvetica',20),width=12,textvariable=input_text,bd=20,insertwidth=4,bg="#c5c7ba",justify="right").place(x=30,y=95)
 
         hit = self.imagemapper.find_rect(event.x, event.y)
+        
+        firstNum = None
+        secondNum = None
+
         display = None
-        if hit is 0:
-            display = '8'
-            self.number = self.number + "8"
-        if hit is 1:
-            display = '7'
-        self.msg_text.set('{} clicked'.format(display))
-        input_text.set(self.number)
+        if hit is None:
+            display = str(hit)
+
+        #could do a switch case here
+        elif hit == 10:
+            self.msg_text.set('m+ clicked')
+
+        elif hit == 11:
+            self.msg_text.set('m- clicked')
+
+        elif hit == 12:
+            self.msg_text.set('mr clicked')            
+
+        elif hit == 13:
+            self.msg_text.set('mc clicked')
+
+        elif hit == 14:
+            self.msg_text.set('plmin clicked')
+
+        #most important case!
+        elif hit == 15:
+            self.msg_text.set('eq clicked')
+
+        elif hit == 16:
+            self.msg_text.set('on clicked')
+            self.number = "0"
+            input_text.set(self.number)
+
+        elif hit == 17:
+            self.msg_text.set('off clicked')
+            self.number = ""
+
+        elif hit == 18:
+            self.msg_text.set('dec clicked')
+
+            #not letting the user enter "." if there is already a "."
+            #alternative option 
+            if "." not in self.number and self.number != "":
+                self.number += "."
+            input_text.set(self.number)
+
+        elif hit == 19:
+            self.msg_text.set('del pct clicked')
+
+        elif hit == 20:
+            self.msg_text.set('sqrt clicked')
+
+        elif hit == 21:
+            self.msg_text.set('pct clicked')
+
+        elif hit == 22:
+            self.msg_text.set('ce c clicked')
+
+        elif hit == 23:
+            self.msg_text.set('div clicked')
+
+        elif hit == 24:
+            self.msg_text.set('mul clicked')
+
+        elif hit == 25:
+            self.msg_text.set('sub clicked')
+
+        elif hit == 26:
+            self.msg_text.set('add clicked')
+
+
+        else:
+            display = str(hit)
+            #trailing zeros (issue #4)
+            #if self.number   == '0':
+            #    display = ''
+            self.number = self.number + display
+
+            self.msg_text.set('{} clicked'.format(display))
+            input_text.set(self.number)
 
 
             
