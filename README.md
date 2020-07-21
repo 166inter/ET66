@@ -1,4 +1,4 @@
-	[10 Principles for Good Design, Dieter Rams:](https://ifworlddesignguide.com/design-specials/dieter-rams-10-principles-for-good-design)
+[10 Principles for Good Design, Dieter Rams:](https://ifworlddesignguide.com/design-specials/dieter-rams-10-principles-for-good-design)
 
 1. *Good design is innovative*
 2. *Good design makes a product useful*
