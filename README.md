@@ -1,4 +1,4 @@
-​	[10 Principles for Good Design, Dieter Rams:](https://ifworlddesignguide.com/design-specials/dieter-rams-10-principles-for-good-design)
+	[10 Principles for Good Design, Dieter Rams:](https://ifworlddesignguide.com/design-specials/dieter-rams-10-principles-for-good-design)
 
 1. *Good design is innovative*
 2. *Good design makes a product useful*
@@ -17,6 +17,18 @@ By the start of the 1980's calculators were becoming common household products. 
 
 
 
-*As simple as possible, but not simpler*
+How to run:
 
-​											*- Albert Einstein*
+1. Make sure the following dependencies are installed:
+
+   1. python 3
+   2. pip (recommended to install tkinter)
+   3. tkinter (can install via the python package manager with `pip install tkinter`)
+
+2. Clone the repository
+
+3.  from the directory you cloned the repository run the following commands:
+
+   `cd ET66`
+
+   `python ET66.py`
