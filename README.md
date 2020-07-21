@@ -19,14 +19,14 @@ By the start of the 1980's calculators were becoming common household products. 
 
 How to run:
 
-1. Make sure the following dependencies are installed:
+Make sure the following dependencies are installed:
 
    * python 3
    * pip (recommended to install tkinter)
    * tkinter (can install via the python package manager with `pip install tkinter`)
 
 
-2.  run the following commands:
+run the following commands:
 
    `git clone github.com/166inter/ET66.git`
 
