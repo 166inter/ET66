@@ -222,8 +222,7 @@ class Demo(tk.Frame):
         a = 34 #width of big buttons
         b = 20 #width of on/off buttons
 
-        img_rects = [
-                     #number buttons
+        img_rects = [#number buttons
                      Rect(77,418,77+a,418+a), # btn 0
                      Rect(77,372,77+a,372+a), # btn 1
                      Rect(124,372,124+a,372+a), # btn 2
@@ -243,9 +242,7 @@ class Demo(tk.Frame):
                      Rect(216,233,216+a,233+a), # btn plmin
                      Rect(170,418,170+a,418+a), # btn eq
 
-
                      #on and off buttons
-
                      Rect(37,170,37+b,170+b), # btn on
                      Rect(83,170,83+b,170+b), # btn off
 
@@ -261,7 +258,6 @@ class Demo(tk.Frame):
                      Rect(216,418,216+a,418+a), # btn add
                      ]
 
-
         self.imagemapper = ImageMapper(self.picture, img_rects)
         # use Label widget to display image
         self.image = tk.Label(self, image=self.picture, borderwidth=0)
@@ -269,6 +265,17 @@ class Demo(tk.Frame):
         self.image.grid(row=1, column=0)
 
     number = ""
+    firstNum = None
+    secondNum = None
+    result = None
+    operator = None
+    mem = 0
+
+    def calc_reset():
+    	self.result = None
+    	self.firstNum = None
+    	self.secondNum = None
+    	self.operator = None
 
     def image_click(self, event):
         input_text=tk.StringVar()
@@ -276,22 +283,33 @@ class Demo(tk.Frame):
 
         hit = self.imagemapper.find_rect(event.x, event.y)
         
-        firstNum = None
-        secondNum = None
+        if self.number == "0":
+        	self.number = ""
+        	self.result = '0'
 
-        display = None
+        #display = None
         if hit is None:
-            display = str(hit)
+            input_text.set(self.result)
+
 
         #could do a switch case here
         elif hit == 10:
             self.msg_text.set('m+ clicked')
+            self.mem = self.number
+            #debugging
+            print("mem: ", self.mem)
 
         elif hit == 11:
             self.msg_text.set('m- clicked')
 
         elif hit == 12:
-            self.msg_text.set('mr clicked')            
+            self.msg_text.set('mr clicked')
+            #debugging
+            print("str(mem): ", str(self.mem))
+            print("mem: ", self.mem)
+            self.display = ""
+
+            input_text.set(str(self.mem))     
 
         elif hit == 13:
             self.msg_text.set('mc clicked')
@@ -302,6 +320,25 @@ class Demo(tk.Frame):
         #most important case!
         elif hit == 15:
             self.msg_text.set('eq clicked')
+            if self.firstNum == None:
+                self.result = self.number  
+            else:
+            	self.secondNum = self.number
+            if self.firstNum != None and self.secondNum == None:
+                input_text.set(self.number)
+                self.number = ''
+
+            if self.firstNum != None and self.secondNum != None:
+            	if self.operator == "+":
+            		self.result = str(int(self.firstNum) + int(self.secondNum))
+
+            self.operator = None
+
+            input_text.set(self.result)
+            #self.result = None
+            self.firstNum = self.result
+            self.secondNum = None
+            #self.operator = None
 
         elif hit == 16:
             self.msg_text.set('on clicked')
@@ -312,6 +349,12 @@ class Demo(tk.Frame):
             self.msg_text.set('off clicked')
             self.number = ""
 
+            self.result = None
+            self.firstNum = None
+            self.secondNum = None
+            self.operator = None
+
+           
         elif hit == 18:
             self.msg_text.set('dec clicked')
 
@@ -344,6 +387,25 @@ class Demo(tk.Frame):
 
         elif hit == 26:
             self.msg_text.set('add clicked')
+            input_text.set(self.number)
+
+            self.operator = "+"
+            if self.firstNum == None:
+                self.firstNum = self.number
+            else:
+            	self.secondNum = self.number
+            self.number = ""
+
+            if self.firstNum != None and self.secondNum != None:
+            	self.result = str(int(self.firstNum) + int(self.secondNum))
+            	self.firstNum = self.result
+            	input_text.set(self.result)
+
+            #debugging
+            print ("num stored in firstNum:", self.firstNum)
+            print ("num stored in secondNum:", self.secondNum)
+
+
 
 
         else:
