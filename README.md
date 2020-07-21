@@ -21,13 +21,14 @@ How to run:
 
 1. Make sure the following dependencies are installed:
 
-   1. python 3
-   2. pip (recommended to install tkinter)
-   3. tkinter (can install via the python package manager with `pip install tkinter`)
+   * python 3
+   * pip (recommended to install tkinter)
+   * tkinter (can install via the python package manager with `pip install tkinter`)
 
-2. Clone the repository
 
-3.  from the directory you cloned the repository run the following commands:
+2.  run the following commands:
+
+   `git clone github.com/166inter/ET66.git`
 
    `cd ET66`
 
