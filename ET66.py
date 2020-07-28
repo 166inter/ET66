@@ -272,10 +272,10 @@ class Demo(tk.Frame):
     mem = 0
 
     def calc_reset():
-    	self.result = None
-    	self.firstNum = None
-    	self.secondNum = None
-    	self.operator = None
+        self.result = None
+        self.firstNum = None
+        self.secondNum = None
+        self.operator = None
 
     def image_click(self, event):
         input_text=tk.StringVar()
@@ -284,8 +284,8 @@ class Demo(tk.Frame):
         hit = self.imagemapper.find_rect(event.x, event.y)
         
         if self.number == "0":
-        	self.number = ""
-        	self.result = '0'
+            self.number = ""
+            self.result = '0'
 
         #display = None
         if hit is None:
@@ -328,26 +328,33 @@ class Demo(tk.Frame):
             if self.firstNum == None:
                 self.result = self.number  
             else:
-            	self.secondNum = self.number
+                self.secondNum = self.number
             if self.firstNum != None and self.secondNum == None:
                 input_text.set(self.number)
                 self.number = ''
 
             if self.firstNum != None and self.secondNum != None:
-            	if self.operator == "+":
-            		self.result = str(int(self.firstNum) + int(self.secondNum))
-            		self.number = self.	result
-            	elif self.operator == "-":
-            		self.result = str(int(self.firstNum) - int(self.secondNum))
-            		self.number = self.result
+                if self.operator == "+":
+                    self.result = str(float(self.firstNum) + float(self.secondNum))
+                    self.number = self. result
+                elif self.operator == "-":
+                    self.result = str(float(self.firstNum) - float(self.secondNum))
+                    self.number = self.result
+                elif self.operator == "*":
+                    self.result = str(float(self.firstNum) * float(self.secondNum))
+                    self.number = self.result
+                elif self.operator == "/":
+                    self.result = str(float(self.firstNum) / float(self.secondNum))
+                    self.number = self.result
 
-            #self.operator = None
-
+            #don't display trailing 0
+            if self.result[-1] == "0" and self.result[-2] == ".":
+                self.result = self.result[:-2]
             input_text.set(self.result)
-            #self.result = None
+            self.result = None
             self.firstNum = self.result
             self.secondNum = None
-            #self.operator = None
+            self.operator = None
 
         elif hit == 16:
             self.msg_text.set('on clicked')
@@ -387,9 +394,39 @@ class Demo(tk.Frame):
 
         elif hit == 23:
             self.msg_text.set('div clicked')
+            input_text.set(self.number)
+
+            self.operator = "/"
+            if self.firstNum == None:
+                self.firstNum = self.number
+            if self.firstNum != None and self.secondNum == None:
+                pass
+            else:
+                self.secondNum = self.number
+            self.number = ""
+
+            if self.firstNum != None and self.secondNum != None:
+                self.result = str(float(self.firstNum) / float(self.secondNum))
+                self.firstNum = self.result
+                input_text.set(self.result)
 
         elif hit == 24:
             self.msg_text.set('mul clicked')
+            input_text.set(self.number)
+
+            self.operator = "*"
+            if self.firstNum == None:
+                self.firstNum = self.number
+            if self.firstNum != None and self.secondNum == None:
+                pass
+            else:
+                self.secondNum = self.number
+            self.number = ""
+
+            if self.firstNum != None and self.secondNum != None:
+                self.result = str(float(self.firstNum) * float(self.secondNum))
+                self.firstNum = self.result
+                input_text.set(self.result)
 
         elif hit == 25:
             self.msg_text.set('sub clicked')
@@ -399,15 +436,15 @@ class Demo(tk.Frame):
             if self.firstNum == None:
                 self.firstNum = self.number
             if self.firstNum != None and self.secondNum == None:
-            	pass
+                pass
             else:
-            	self.secondNum = self.number
+                self.secondNum = self.number
             self.number = ""
 
             if self.firstNum != None and self.secondNum != None:
-            	self.result = str(int(self.firstNum) - int(self.secondNum))
-            	self.firstNum = self.result
-            	input_text.set(self.result)
+                self.result = str(float(self.firstNum) - float(self.secondNum))
+                self.firstNum = self.result
+                input_text.set(self.result)
 
         elif hit == 26:
             self.msg_text.set('add clicked')
@@ -417,15 +454,15 @@ class Demo(tk.Frame):
             if self.firstNum == None:
                 self.firstNum = self.number
             if self.firstNum != None and self.secondNum == None:
-            	pass
+                pass
             else:
-            	self.secondNum = self.number
+                self.secondNum = self.number
             self.number = ""
 
             if self.firstNum != None and self.secondNum != None:
-            	self.result = str(int(self.firstNum) + int(self.secondNum))
-            	self.firstNum = self.result
-            	input_text.set(self.result)
+                self.result = str(float(self.firstNum) + float(self.secondNum))
+                self.firstNum = self.result
+                input_text.set(self.result)
 
 
             #debugging
@@ -436,6 +473,9 @@ class Demo(tk.Frame):
 
 
         else:
+            #debugging
+            #print ("num stored in firstNum:", self.firstNum)
+            #print ("num stored in secondNum:", self.secondNum)
             display = str(hit)
             #trailing zeros (issue #4)
             #if self.number   == '0':
