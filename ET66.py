@@ -319,6 +319,11 @@ class Demo(tk.Frame):
 
         #most important case!
         elif hit == 15:
+
+            #debugging
+            print ("num stored in firstNum:", self.firstNum)
+            print ("num stored in secondNum:", self.secondNum)
+
             self.msg_text.set('eq clicked')
             if self.firstNum == None:
                 self.result = self.number  
@@ -331,8 +336,12 @@ class Demo(tk.Frame):
             if self.firstNum != None and self.secondNum != None:
             	if self.operator == "+":
             		self.result = str(int(self.firstNum) + int(self.secondNum))
+            		self.number = self.	result
+            	elif self.operator == "-":
+            		self.result = str(int(self.firstNum) - int(self.secondNum))
+            		self.number = self.result
 
-            self.operator = None
+            #self.operator = None
 
             input_text.set(self.result)
             #self.result = None
@@ -384,6 +393,21 @@ class Demo(tk.Frame):
 
         elif hit == 25:
             self.msg_text.set('sub clicked')
+            input_text.set(self.number)
+
+            self.operator = "-"
+            if self.firstNum == None:
+                self.firstNum = self.number
+            if self.firstNum != None and self.secondNum == None:
+            	pass
+            else:
+            	self.secondNum = self.number
+            self.number = ""
+
+            if self.firstNum != None and self.secondNum != None:
+            	self.result = str(int(self.firstNum) - int(self.secondNum))
+            	self.firstNum = self.result
+            	input_text.set(self.result)
 
         elif hit == 26:
             self.msg_text.set('add clicked')
@@ -392,6 +416,8 @@ class Demo(tk.Frame):
             self.operator = "+"
             if self.firstNum == None:
                 self.firstNum = self.number
+            if self.firstNum != None and self.secondNum == None:
+            	pass
             else:
             	self.secondNum = self.number
             self.number = ""
@@ -400,6 +426,7 @@ class Demo(tk.Frame):
             	self.result = str(int(self.firstNum) + int(self.secondNum))
             	self.firstNum = self.result
             	input_text.set(self.result)
+
 
             #debugging
             print ("num stored in firstNum:", self.firstNum)
