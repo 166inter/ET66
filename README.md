@@ -21,13 +21,14 @@ While it is currently possible to buy a [reissue of the ET66 calculator](https:/
 9. *Good design is environmentally friendly*
 10. *Good design is as little design as possible*
 
-
 # Requirements
 
    1. The calculator should perform the basic arithmetic operations of an ordinary calculator
    2. The design should closely replicate the Braun ET66
    3. The program should be runnable on Windows, Linux and Mac
 
+# System Architecture
+*to be shown here soon*
 
 # How to run
 
