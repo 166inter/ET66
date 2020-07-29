@@ -1,5 +1,13 @@
 # Overview
 
+This project is for a part of the SEG2105 Course at the University of Ottawa. It is a tribute to one of Dieter Rams' most iconic designs, the ET66 calculator (which is an iteration of the 1980 ET55).
+
+By the start of the 1980's calculators were common household products. Upon the release of the ET55, Braun's calculator design stood apart for its approachability, aesthetic and simplicity.
+
+While it is currently possible to buy a [reissue of the ET66 calculator](https://www.amazon.ca/Braun-BNE001BK-Reissue-Calculator-Black/dp/B00DUDU2Q6), this project is meant to serve as a free software alternative that anyone can use and enjoy.
+
+<img style="float: right;" src="https://images-na.ssl-images-amazon.com/images/I/619wcNR9O5L._AC_SL1500_.jpg" alt="drawing" width="200"/>
+
 ### 10 Principles for Good Design, [Dieter Rams](https://ifworlddesignguide.com/design-specials/dieter-rams-10-principles-for-good-design):
 
 1. *Good design is innovative*
@@ -13,10 +21,12 @@
 9. *Good design is environmentally friendly*
 10. *Good design is as little design as possible*
 
-This project is part of the SEG2105 Course at the University of Ottawa. It is a tribute to one of Dieter Rams' most iconic designs, the ET66 calculator (which is an iteration of the 1980 ET55).
 
-By the start of the 1980's calculators were becoming common household products. Upon the release of the ET55, Braun's calculator design stood apart for its approachability, aesthetic and simplicity.
+# Requirements
 
+   1. The calculator should perform the basic arithmetic operations of an ordinary calculator
+   2. The design should closely replicate the Braun ET66
+   3. The program should be runnable on Windows, Linux and Mac
 
 
 # How to run
