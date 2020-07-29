@@ -1,10 +1,14 @@
-from collections import namedtuple
-import tkinter as tk
 from math import *
 
-
+# credit to martineau for starter code on representing "button areas" :
+#https://stackoverflow.com/questions/37471878/hide-a-button-under-an-image-tkinter
+######################################################################################
+from collections import namedtuple
+import tkinter as tk
 
 window = tk.Tk()
+window.resizable(False, False)
+
 Rect = namedtuple('Rect', 'x0, y0, x1, y1')
 
 class ImageMapper(object):
@@ -20,195 +24,11 @@ class ImageMapper(object):
 
 class Demo(tk.Frame):
 
-
-    
-
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)
         self.grid()
         self.create_widgets()
-
-        ancho_boton=6
-        active_round=False
-        numero=("")
-        blocked_ce=False
-        comas=0
-        reep=""
-        alto_boton=2
-        prev_sign=""
         input_text=tk.StringVar()
-        #clear()#MUESTRA VALOR "0" AL INICIAR LA CALCULADORA
-        bd=10
-
-
-        def digit(n):
-                global numero
-                global l_numeros
-                global blocked_ce
-                blocked_ce=False
-                long=len(l_numeros)
-                if long<2 and numero!=str(pi):
-                    if numero=="0":
-                        numero=numero.replace("0",n)
-                    else:
-                        numero=numero+n
-                    input_text.set(numero)
-
-        def loga():
-            global l_numeros
-            global numero
-            if len(l_numeros)==2:
-                try:
-                    numero=str(eval("log("+l_numeros[0]+")/log("+l_numeros[1]+")")) #l_numeros[0] es el numero y l_numeros[1] es la base
-                    input_text.set(numero)
-                    l_numeros[0]=numero
-                    l_numeros.pop()
-                except:
-                    input_text.set("ERROR")
-                    l_numeros=[]
-                numero=""
-
-        def image_click(self, event):
-            hit = self.imagemapper.find_rect(event.x, event.y)
-
-            display = None
-            if hit is 0:
-                display = '8'
-            if hit is 1:
-                display = '1'
-            self.msg_text.set('{} clicked'.format(display))
-            input_text.set(8)
-
-        def eight():
-            global numero
-            global l_numeros
-            global comas
-            global blocked_ce
-            if len(l_numeros)<2 and numero=="":
-                numero=str(pi)
-                input_text.set(numero)
-                comas+=1
-                blocked_ce=False
-
-        def pee():
-            global numero
-            global l_numeros
-            global comas
-            global blocked_ce
-            if len(l_numeros)<2 and numero=="":
-                numero=str(pi)
-                input_text.set(numero)
-                comas+=1
-                blocked_ce=False
-
-        def coma():
-            global numero
-            global comas
-            if numero!="" and comas==0:
-                numero=numero+"."
-                input_text.set(numero)
-                comas+=1
-
-        def enter():
-            global numero
-            global l_numeros
-            global comas
-            global blocked_ce
-            global active_round
-            if numero!="" and numero!="0.":
-                if active_round==True:
-                    numero=str(eval("round("+str(numero)+")"))
-                    l_numeros.append(numero)
-                    active_round=False
-                else:
-                    l_numeros.append(numero)
-                input_text.set(numero)
-                numero=""
-                comas=0
-                blocked_ce=True
-
-        def operacion(s):
-            global numero
-            global l_numeros
-            global prev_sign
-            global reep
-            if len(l_numeros)==2:
-                try:
-                    numero=str(eval(l_numeros[0]+s+l_numeros[1]))
-                    input_text.set(numero)
-                    l_numeros[0]=numero
-                    reep=l_numeros[1]
-                    l_numeros.pop()
-                    prev_sign=s
-                    print(l_numeros)
-                except:
-                    input_text.set("ERROR")
-                    l_numeros=[]
-                numero=""
-            elif len(l_numeros)==1 and prev_sign==s: 
-                numero=eval(l_numeros[0]+s+reep)
-                input_text.set(numero)
-                l_numeros[0]=str(numero)
-                print(l_numeros)
-                numero=""
-
-        def funci(s):
-            global numero
-            global l_numeros
-            if len(l_numeros)==1:
-                try:
-                    numero=str(eval(s+"("+l_numeros[0]+")"))#[0]
-                    input_text.set(numero)
-                    l_numeros[0]=numero
-                    prev_sign=s
-                except:
-                    input_text.set("ERROR")
-                    l_numeros=[]
-                numero=""
-
-        def rounded():
-            global numero
-            global active_round
-            global l_numeros
-            if not numero.endswith("."):
-                active_round=True
-                if numero!="":
-                    numero=eval("round("+str(numero)+")")
-                    input_text.set(numero)
-                else:
-                    l_numeros[-1]=str(eval("round("+l_numeros[-1]+")"))
-                    input_text.set(l_numeros[-1])
-            
-        def cambia_signo(): 
-            global numero
-            global l_numeros
-            if numero!="0" and numero!="":
-                numero=str(eval(numero+"*(-1)"))
-                input_text.set(numero)
-            elif numero=="" and len(l_numeros)==1: #nuevo
-                if l_numeros[0]!="0":
-                    l_numeros[0]=str(eval(l_numeros[0]+"*(-1)"))
-                    input_text.set(l_numeros[0])
-
-        def clear():
-            global numero
-            global l_numeros
-            global comas
-            numero=""
-            l_numeros=[]
-            input_text.set("0")
-            comas=0
-
-        def clear_error():
-            global numero
-            global comas
-            global blocked_ce
-            if blocked_ce==False:
-                numero=""
-                input_text.set("0")
-                comas=0
-                blocked_ce=True
-
 
         tk.Entry(window, font=('Arial',20,"bold"),width=12,textvariable=input_text,bd=20,insertwidth=4,bg="#c5c7ba",justify="right").place(x=30,y=95)
 
@@ -271,7 +91,8 @@ class Demo(tk.Frame):
     operator = None
     mem = 0
 
-    def calc_reset():
+
+    def calc_reset(): #currently not using this... didn't work when I tried to call it. I think it will work if I use "super()"
         self.result = None
         self.firstNum = None
         self.secondNum = None
@@ -290,7 +111,6 @@ class Demo(tk.Frame):
         #display = None
         if hit is None:
             input_text.set(self.result)
-
 
         #could do a switch case here
         elif hit == 10:
@@ -329,10 +149,13 @@ class Demo(tk.Frame):
                 self.result = self.number  
             else:
                 self.secondNum = self.number
+            print ("num stored in firstNum:", self.firstNum)
+            print ("num stored in secondNum:", self.secondNum)
             if self.firstNum != None and self.secondNum == None:
                 input_text.set(self.number)
                 self.number = ''
 
+            #handle the result of the operation based on the operator used
             if self.firstNum != None and self.secondNum != None:
                 if self.operator == "+":
                     self.result = str(float(self.firstNum) + float(self.secondNum))
@@ -346,6 +169,11 @@ class Demo(tk.Frame):
                 elif self.operator == "/":
                     self.result = str(float(self.firstNum) / float(self.secondNum))
                     self.number = self.result
+                elif self.operator == "del pct":
+                	#https://sciencing.com/calculate-delta-percentage-8475192.html
+                    self.result = str((float(self.secondNum) - float(self.firstNum))/float(self.firstNum)*100)
+                    self.number = self.result
+                    print("result: ", self.result)
 
             #don't display trailing 0
             if self.result[-1] == "0" and self.result[-2] == ".":
@@ -370,7 +198,6 @@ class Demo(tk.Frame):
             self.secondNum = None
             self.operator = None
 
-           
         elif hit == 18:
             self.msg_text.set('dec clicked')
 
@@ -382,15 +209,100 @@ class Demo(tk.Frame):
 
         elif hit == 19:
             self.msg_text.set('del pct clicked')
+            self.operator = "del pct"
+
+            if self.firstNum == None:
+                self.firstNum = self.number
+            if self.firstNum != None and self.secondNum == None:
+                pass
+            else:
+                self.secondNum = self.number
+            self.number = ""
+
+            #if self.firstNum != None and self.secondNum != None:
+            #    self.result = str((float(self.secondNum) - float(self.secondNum))/float(self.secondNum)*100)
+            #    self.firstNum = self.result
+            #    input_text.set(self.result)
+
 
         elif hit == 20:
             self.msg_text.set('sqrt clicked')
+            #debugging
+            print ("num stored in firstNum:", self.firstNum)
+            print ("num stored in secondNum:", self.secondNum)
+
+            #if self.firstNum == None:
+            #    self.firstNum = self.number
+            #    self.firstNum = self.result
+            #if self.firstNum != None and self.secondNum == None:
+            #    pass
+
+            self.result = sqrt(float(self.number))
+
+            #don't display trailing 0
+            self.result = str(self.result)
+            if self.result[-1] == "0" and self.result[-2] == ".":
+                self.result = self.result[:-2]
+            input_text.set(self.result)
+
+            #self.result = None
+            self.number = self.result
+            self.firstNum = self.result
+            self.secondNum = None
+            self.operator = None
+
+            print ("num stored in firstNum:", self.firstNum)
+            print ("num stored in secondNum:", self.secondNum)
 
         elif hit == 21:
             self.msg_text.set('pct clicked')
+            #https://sciencing.com/divide-percent-using-calculator-7588458.html
+
+			#debugging
+            print ("num stored in firstNum:", self.firstNum)
+            print ("num stored in secondNum:", self.secondNum)
+
+            if self.firstNum == None:
+                self.result = str(float(self.number) / 100)
+            else:
+                self.secondNum = self.number
+            if self.firstNum != None and self.secondNum == None:
+                input_text.set(self.number)
+                self.number = ''
+
+            if self.firstNum != None and self.secondNum != None:
+                if self.operator == "+":
+                    self.result = str(float(self.firstNum) + float(self.secondNum)/float(self.firstNum)*100)
+                    self.number = self. result
+                elif self.operator == "-":
+                    self.result = str(float(self.firstNum) - float(self.secondNum)/float(self.firstNum)*100)
+                    self.number = self.result
+                elif self.operator == "*":
+                    self.result = str(float(self.firstNum) * float(self.secondNum) / 100)
+                    self.number = self.result
+                elif self.operator == "/":
+                    self.result = str(float(self.firstNum) / float(self.secondNum))
+                    self.number = self.result
+
+            #don't display trailing 0
+            if self.result[-1] == "0" and self.result[-2] == ".":
+                self.result = self.result[:-2]
+            input_text.set(self.result)
+            self.result = None
+            self.firstNum = self.result
+            self.secondNum = None
+            self.operator = None
+
 
         elif hit == 22:
             self.msg_text.set('ce c clicked')
+            self.number = "0"
+            input_text.set(self.number)
+            self.result = None
+            self.firstNum = self.result
+            self.secondNum = None
+            self.operator = None
+
 
         elif hit == 23:
             self.msg_text.set('div clicked')
@@ -464,13 +376,9 @@ class Demo(tk.Frame):
                 self.firstNum = self.result
                 input_text.set(self.result)
 
-
             #debugging
             print ("num stored in firstNum:", self.firstNum)
             print ("num stored in secondNum:", self.secondNum)
-
-
-
 
         else:
             #debugging
@@ -484,10 +392,6 @@ class Demo(tk.Frame):
 
             self.msg_text.set('{} clicked'.format(display))
             input_text.set(self.number)
-
-
-            
-
 app = Demo()
 app.master.title('Braun ET66 Tribute')
 app.mainloop()
