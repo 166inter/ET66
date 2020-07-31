@@ -29,7 +29,9 @@ While it is currently possible to buy a [reissue of the ET66 calculator](https:/
 The program is completely contained in the file ET66.py, except for the .gif image file of the calculator, which must be kept in the same folder as the script.
 
 The following diagram shows the Python packages and their methods used and the two core classes and their methods:
+
 <img src="https://raw.githubusercontent.com/166inter/ET66/master/ET66%20program%20architechture.jpg" alt="drawing" width="700"/>
+
 ### How to modify or add new features
 The main functionality of the program is found in image_click. There are many possiblities to simplify or refactor the actions for each "hit" or click. If one is interested in making a new calculator face, one would need to modify the image_rects list to map the buttons correctly, along with ensuring the dimensions and screen match. 
 
