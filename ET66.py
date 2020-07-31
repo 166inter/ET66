@@ -1,8 +1,13 @@
+#__author__ = "Nicholas Schmidt"
+#__license__ = "GPL"
+#__maintainer__ = "Nicholas Schmidt"
+#__email__ = "nchlsschmidt@gmail.com"
+#__status__ = "Beta"
+
+
 from math import *
 
-# credit to martineau for starter code on representing "button areas" :
-#https://stackoverflow.com/questions/37471878/hide-a-button-under-an-image-tkinter
-######################################################################################
+
 from collections import namedtuple
 import tkinter as tk
 
@@ -11,6 +16,7 @@ window.resizable(False, False)
 
 Rect = namedtuple('Rect', 'x0, y0, x1, y1')
 
+#the following class creates the rectangle for the gui
 class ImageMapper(object):
     def __init__(self, image, img_rects):
         self.width, self.height = image.width(), image.height()
@@ -22,7 +28,10 @@ class ImageMapper(object):
                 return i
         return None
 
-class Demo(tk.Frame):
+#the following class contains all the core functionality for the program
+#It maps all the buttons in the calculator image to virtual buttons
+#It listens for clicks and displays an output on the calculator screen accordingly
+class ET66(tk.Frame):
 
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)
@@ -42,6 +51,9 @@ class Demo(tk.Frame):
         a = 34 #width of big buttons
         b = 20 #width of on/off buttons
 
+# credit to martineau for starter code on representing "button areas" :
+#https://stackoverflow.com/questions/37471878/hide-a-button-under-an-image-tkinter
+######################################################################################
         img_rects = [#number buttons
                      Rect(77,418,77+a,418+a), # btn 0
                      Rect(77,372,77+a,372+a), # btn 1
@@ -83,7 +95,7 @@ class Demo(tk.Frame):
         self.image = tk.Label(self, image=self.picture, borderwidth=0)
         self.image.bind('<Button-1>', self.image_click)
         self.image.grid(row=1, column=0)
-
+######################################################################################
     number = ""
     firstNum = None
     secondNum = None
@@ -97,6 +109,55 @@ class Demo(tk.Frame):
         self.firstNum = None
         self.secondNum = None
         self.operator = None
+
+    def evaluate():
+        """
+    	#debugging
+        print ("num stored in firstNum:", self.firstNum)
+        print ("num stored in secondNum:", self.secondNum)
+
+        self.msg_text.set('eq clicked')
+        if self.firstNum == None:
+            self.result = self.number  
+        else:
+            self.secondNum = self.number
+        print ("num stored in firstNum:", self.firstNum)
+        print ("num stored in secondNum:", self.secondNum)
+        if self.firstNum != None and self.secondNum == None:
+            input_text.set(self.number)
+            self.number = ''
+
+            #handle the result of the operation based on the operator used
+        if self.firstNum != None and self.secondNum != None:
+            if self.operator == "+":
+                self.result = str(float(self.firstNum) + float(self.secondNum))
+                self.number = self. result
+            elif self.operator == "-":
+                self.result = str(float(self.firstNum) - float(self.secondNum))
+                self.number = self.result
+            elif self.operator == "*":
+                self.result = str(float(self.firstNum) * float(self.secondNum))
+                self.number = self.result
+            elif self.operator == "/":
+                self.result = str(float(self.firstNum) / float(self.secondNum))
+                self.number = self.result
+            elif self.operator == "del pct":
+                	#https://sciencing.com/calculate-delta-percentage-8475192.html
+                self.result = str((float(self.secondNum) - float(self.firstNum))/float(self.firstNum)*100)
+                self.number = self.result
+                print("result: ", self.result)
+
+            #don't display trailing 0
+        if self.result[-1] == "0" and self.result[-2] == ".":
+            self.result = self.result[:-2]
+        input_text.set(self.result)
+        self.result = None
+        self.firstNum = self.result
+        self.secondNum = None
+        self.operator = None
+
+    	pass
+    	"""
 
     def image_click(self, event):
         input_text=tk.StringVar()
@@ -115,12 +176,21 @@ class Demo(tk.Frame):
         #could do a switch case here
         elif hit == 10:
             self.msg_text.set('m+ clicked')
-            self.mem = self.number
+            self.mem += float(self.number)
+            #self.mem = str(self.mem)
             #debugging
             print("mem: ", self.mem)
+            self.number = ""
+
 
         elif hit == 11:
             self.msg_text.set('m- clicked')
+            self.mem -= float(self.number)
+            self.mem = str(self.mem)
+            #debugging
+            print("mem: ", self.mem)
+            self.number = ""
+
 
         elif hit == 12:
             self.msg_text.set('mr clicked')
@@ -128,14 +198,29 @@ class Demo(tk.Frame):
             print("str(mem): ", str(self.mem))
             print("mem: ", self.mem)
             self.display = ""
+            #don't display trailing 0
+            #if self.mem[-1] == "0" and self.mem[-2] == ".":
+            #    self.mem = self.mem[:-2]
 
             input_text.set(str(self.mem))     
-
+            
         elif hit == 13:
             self.msg_text.set('mc clicked')
+            self.mem = 0
 
         elif hit == 14:
             self.msg_text.set('plmin clicked')
+
+            if self.number != None:
+
+	            if self.number[0] != "-" and len(self.number) > 1:
+	            	self.number  = "-" + self.number
+
+	            elif self.number[0] == "-" and len(self.number) > 1:
+	            	self.number = self.number[1:]
+	            	
+
+            input_text.set(self.number)
 
         #most important case!
         elif hit == 15:
@@ -164,16 +249,28 @@ class Demo(tk.Frame):
                     self.result = str(float(self.firstNum) - float(self.secondNum))
                     self.number = self.result
                 elif self.operator == "*":
+                    if self.number == None or self.number == "":
+                        self.number = "0"
                     self.result = str(float(self.firstNum) * float(self.secondNum))
                     self.number = self.result
                 elif self.operator == "/":
-                    self.result = str(float(self.firstNum) / float(self.secondNum))
-                    self.number = self.result
+                    #debugging
+                    print("number: ", self.number)
+                    if self.number == None or self.number == "":
+                    	self.number = "0"
+                    print("number: ", self.number)
+
+                    if self.number != "0":
+                        self.result = str(float(self.firstNum) / float(self.secondNum))
+                        self.number = self.result
+                    else:
+                        self.result = "ERROR"
                 elif self.operator == "del pct":
-                	#https://sciencing.com/calculate-delta-percentage-8475192.html
+                    #https://sciencing.com/calculate-delta-percentage-8475192.html
                     self.result = str((float(self.secondNum) - float(self.firstNum))/float(self.firstNum)*100)
                     self.number = self.result
                     print("result: ", self.result)
+
 
             #don't display trailing 0
             if self.result[-1] == "0" and self.result[-2] == ".":
@@ -182,7 +279,7 @@ class Demo(tk.Frame):
             self.result = None
             self.firstNum = self.result
             self.secondNum = None
-            self.operator = None
+            #self.operator = None
 
         elif hit == 16:
             self.msg_text.set('on clicked')
@@ -288,10 +385,10 @@ class Demo(tk.Frame):
             if self.result[-1] == "0" and self.result[-2] == ".":
                 self.result = self.result[:-2]
             input_text.set(self.result)
-            self.result = None
-            self.firstNum = self.result
-            self.secondNum = None
-            self.operator = None
+            #self.result = None
+            #self.firstNum = self.result
+            #self.secondNum = None
+            #self.operator = None
 
 
         elif hit == 22:
@@ -317,11 +414,6 @@ class Demo(tk.Frame):
                 self.secondNum = self.number
             self.number = ""
 
-            if self.firstNum != None and self.secondNum != None:
-                self.result = str(float(self.firstNum) / float(self.secondNum))
-                self.firstNum = self.result
-                input_text.set(self.result)
-
         elif hit == 24:
             self.msg_text.set('mul clicked')
             input_text.set(self.number)
@@ -342,7 +434,7 @@ class Demo(tk.Frame):
 
         elif hit == 25:
             self.msg_text.set('sub clicked')
-            input_text.set(self.number)
+            #input_text.set(self.number)
 
             self.operator = "-"
             if self.firstNum == None:
@@ -350,7 +442,8 @@ class Demo(tk.Frame):
             if self.firstNum != None and self.secondNum == None:
                 pass
             else:
-                self.secondNum = self.number
+                #self.secondNum = self.number
+                pass
             self.number = ""
 
             if self.firstNum != None and self.secondNum != None:
@@ -392,6 +485,6 @@ class Demo(tk.Frame):
 
             self.msg_text.set('{} clicked'.format(display))
             input_text.set(self.number)
-app = Demo()
+app = ET66()
 app.master.title('Braun ET66 Tribute')
 app.mainloop()
