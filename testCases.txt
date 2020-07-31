@@ -1,0 +1,99 @@
+
+Test case 1: turn on calculator, press 808 and press equals
+Expected output: 808
+Status: PASSED
+
+*************************************************************
+Test case 2: turn on, press 555 and press m+, then press mr
+Expected output: 555
+Status: PASSED
+
+*************************************************************
+Test case 3: click on any button while calculator is off
+Expected output: No output
+Status: FAILED
+
+*************************************************************
+Test case 4: turn on, type 55, +, 5, x, 2 
+Expected output: 120
+Status: FAILED
+
+*************************************************************
+Test case 5: turn on, type 110, +/-, +, 5, =, +/-
+Expected output: 105
+Status: FAILED
+
+*************************************************************
+Test case 6: turn on, type 34.2, del pct, 32.6, =
+Expected output: -4.678362573099419
+Status: PASSED
+
+*************************************************************
+Test case 7: turn on, type 909, m+, 808, m-, mr
+Expected output: 101
+Status: PASSED
+
+*************************************************************
+Test case 8: turn on, type 49, sqrt
+Expected output: 7
+Status: PASSED
+
+*************************************************************
+Test case 9: turn on, type 1, /, 0
+Expected output: ERROR
+Status: PASSED
+
+*************************************************************
+Test case 10: turn on, type 1, *, 0
+Expected output: 0 
+Status: FAILED
+
+*************************************************************
+Test case 11: 
+Expected output: 
+Status: 
+
+*************************************************************
+Test case 12: 
+Expected output: 
+Status: 
+
+*************************************************************
+Test case 13: 
+Expected output: 
+Status: 
+
+*************************************************************
+Test case 14: 
+Expected output: 
+Status: 
+
+*************************************************************
+Test case 15: 
+Expected output: 
+Status: 
+
+*************************************************************
+Test case 16: 
+Expected output: 
+Status: 
+
+*************************************************************
+Test case 17: 
+Expected output: 
+Status: 
+
+*************************************************************
+Test case 18: 
+Expected output: 
+Status: 
+
+*************************************************************
+Test case 19: 
+Expected output: 
+Status: 
+
+*************************************************************
+Test case 20: 
+Expected output: 
+Status: 

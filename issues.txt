@@ -1,0 +1,15 @@
+1. m- not registering -> FIXED
+2. None showing up on calculator display -> FIXED
+3. Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.7_3.7.2288.0_x64__qbz5n2kfra8p0\lib\tkinter\__init__.py", line 1705, in __call__
+    return self.func(*args)
+  File "ET66.py", line 315, in image_click
+    if "." not in number:
+UnboundLocalError: local variable 'number' referenced before assignment
+How to recreate: click on dec -> FIXED (solution: use self. ...)
+
+4. Leading 0 ...-> FIXED
+5. Result on screen disappears when clicking somewhere that is not a button -> FIXED
+
+For other issues, check failed test cases in testCases.txt
