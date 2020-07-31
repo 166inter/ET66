@@ -36,6 +36,10 @@ The following diagram shows the Python packages and their methods used and the t
 The main functionality of the program is found in image_click. There are many possiblities to simplify or refactor the actions for each "hit" or click. If one is interested in making a new calculator face, one would need to modify the image_rects list to map the buttons correctly, along with ensuring the dimensions and screen match. 
 
 Please note that the calculator provides basic functionality, however there are some known issues (as shown in testCases.txt)
+
+# Test Cases
+see testCases.txt
+
 # How to run
 
 ### Make sure the following dependencies are installed:
